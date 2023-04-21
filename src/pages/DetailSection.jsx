@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import arrow from "/icon-arrow.svg";
 import DetailCard from "../components/DetailCard";
-import { useLazyGetIpDataQuery } from "../app/api/ipSlice";
+import { useLazyGetIpDataQuery, useLazyGetMyIpDataQuery } from "../app/api/ipSlice";
 
 function DetailSection() {
   const [inputData, setInputData] = useState("");
   const [getIpData, { isLoading }] = useLazyGetIpDataQuery();
+  const [getMyIp, { isLoading: loading }] = useLazyGetMyIpDataQuery();
 
   const handleChange = e => {
     e.preventDefault();
@@ -18,9 +19,20 @@ function DetailSection() {
     }
     setInputData("");
   };
+  const detectMyIp = () => {
+    getMyIp()
+      .unwrap()
+      .then(res => setInputData(res?.geoplugin_request));
+  };
 
   return (
     <section className="xl:bg-desktopImage bg-mobileImage bg-cover flex flex-col gap-6 justify-center place-items-center h-[250px]">
+      <button
+        disabled={loading || isLoading}
+        onClick={detectMyIp}
+        className="bg-black p-3 h-[55px] text-white flex justify-center place-items-center rounded-xl absolute right-1 bottom-1 z-[9999] xl:top-1">
+        Detect My IP
+      </button>
       <div className="text-white text-3xl font-semiBold">IP Address Tracker</div>
       <div className="relative">
         <input

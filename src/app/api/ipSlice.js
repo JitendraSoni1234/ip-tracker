@@ -3,18 +3,24 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const ipSlice = createApi({
   reducerPath: "ipSlice",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://geo.ipify.org/api/v2/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "" }),
   endpoints: builder => ({
     getIpData: builder.query({
-      query: data => {
-        return {
-          url: "country,city",
-          params: {
-            apiKey: "at_ABlZ5bcjMpJ3xBZHPSJ5tVjOurkvo",
-            ipAddress: data,
-          },
-        };
-      },
+      query: data => ({
+        url: "https://geo.ipify.org/api/v2/country,city",
+        params: {
+          apiKey: "at_ABlZ5bcjMpJ3xBZHPSJ5tVjOurkvo",
+          ipAddress: data,
+        },
+      }),
+    }),
+    getMyIpData: builder.query({
+      query: () => ({
+        url: "http://www.geoplugin.net/json.gp",
+        params: {
+          callback: "?",
+        },
+      }),
     }),
   }),
 });
@@ -41,4 +47,4 @@ const ipReducer = createSlice({
 });
 
 export default ipReducer.reducer;
-export const { useLazyGetIpDataQuery } = ipSlice;
+export const { useLazyGetIpDataQuery, useLazyGetMyIpDataQuery } = ipSlice;
