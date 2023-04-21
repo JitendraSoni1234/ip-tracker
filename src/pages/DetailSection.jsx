@@ -30,7 +30,7 @@ function DetailSection() {
       <button
         disabled={loading || isLoading}
         onClick={detectMyIp}
-        className="bg-black p-3 h-[55px] text-white flex justify-center place-items-center rounded-xl absolute right-1 bottom-1 z-[9999] xl:top-1">
+        className="bg-black p-3 h-[55px] text-white flex justify-center place-items-center rounded-xl absolute right-1 bottom-1 z-[9999]">
         Detect My IP
       </button>
       <div className="text-white text-3xl font-semiBold">IP Address Tracker</div>
