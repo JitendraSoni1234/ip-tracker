@@ -16,9 +16,9 @@ export const ipSlice = createApi({
     }),
     getMyIpData: builder.query({
       query: () => ({
-        url: "http://www.geoplugin.net/json.gp",
+        url: "http://www.geoplugin.net/json.gp?",
         params: {
-          callback: "?",
+          jsoncallback: "?",
         },
       }),
     }),
